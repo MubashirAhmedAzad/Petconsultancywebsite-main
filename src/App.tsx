@@ -140,7 +140,7 @@ function AppContent() {
       <AnimatePresence>
         {showFAB && (
           <>
-            {/* Chat Button */}
+            {/* Chat Button }
             <motion.div
               initial={{ opacity: 0, scale: 0, x: 100 }}
               animate={{ opacity: 1, scale: 1, x: 0 }}
@@ -172,29 +172,43 @@ function AppContent() {
                   <span className="absolute -top-1 -right-1 w-4 h-4 bg-success rounded-full border-2 border-white dark:border-gray-900 animate-pulse" />
                 </Button>
               </motion.div>
-            </motion.div>
+            </motion.div>*/}
 
             {/* Call Button */}
+            
+            {/* Call Button with Chat Button Transition */}
             <motion.div
               initial={{ opacity: 0, scale: 0, x: 100 }}
               animate={{ opacity: 1, scale: 1, x: 0 }}
               exit={{ opacity: 0, scale: 0, x: 100 }}
-              transition={{ type: "spring", stiffness: 260, damping: 20, delay: 0.1 }}
-              className="fixed bottom-44 right-8 z-40"
+              transition={{ type: "spring", stiffness: 260, damping: 20 }}
+              className="fixed bottom-20 right-8 z-40"
             >
               <motion.div
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
+                animate={{
+                  y: [0, -10, 0], // ✨ floating animation (same as chat)
+                }}
+                transition={{
+                  y: {
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  },
+                }}
               >
                 <Button
                   onClick={handleCallClick}
-                  className="w-14 h-14 rounded-full glass border-2 border-primary/30 hover:border-primary hover:bg-primary/10 transition-all duration-300"
+                  className="relative w-14 h-14 rounded-full bg-gradient-to-r from-accent to-secondary hover:shadow-2xl transition-all duration-300 group overflow-hidden"
                   aria-label="Call us"
                 >
-                  <Phone className="w-6 h-6 text-primary" />
+                  <div className="absolute inset-0 bg-white/20 rounded-full blur-xl group-hover:blur-2xl transition-all" />
+                  <Phone className="w-6 h-6 relative z-10 text-white" />
                 </Button>
               </motion.div>
             </motion.div>
+
           </>
         )}
       </AnimatePresence>
